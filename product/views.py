@@ -1,25 +1,18 @@
 from django.db.models import Q
-from django.core.mail import send_mail
-
-# from django.conf.settings import EMAIL_HOST_USER
-
-from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics, response, status
+from rest_framework.permissions import IsAuthenticated
 
 from account.renderers import UserRenderer
-
-from account.models import EndUser
-from product.models import Product, Order
+from product.models import Product
 from product.serializers import (
     RequestListCreateSerializer,
-    OrderSerializer,
-    OrderListSerializer,
-    OrderUpdateSerializer,
-    OrderDetailSerializer,
 )
 
 
-class RequestListCreateView(generics.ListCreateAPIView):
+# from django.conf.settings import EMAIL_HOST_USER
+
+
+class ProductListCreateView(generics.ListCreateAPIView):
     serializer_class = RequestListCreateSerializer
     renderer_classes = [UserRenderer]
     permission_classes = [IsAuthenticated]
@@ -71,3 +64,11 @@ class RequestListCreateView(generics.ListCreateAPIView):
                 },
                 status=status.HTTP_404_NOT_FOUND,
             )
+
+class ProductRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = "id"
+    lookup_url_kwarg = "request_id"
+    serializer_class = RequestListCreateSerializer
+    renderer_classes = [UserRenderer]
+    permission_classes = [IsAuthenticated]
+    queryset = Product.objects.all()
