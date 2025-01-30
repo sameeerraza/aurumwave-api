@@ -23,30 +23,5 @@ class Product(models.Model):
     tags = models.ManyToManyField(Tag, related_name="products")
 
     def __str__(self):
-        return self.title
+        return f"{self.id} - {self.title}"
 
-
-class Order(models.Model):
-    STATUS_CHOICES = [
-        (0, "PENDING"),
-        (1, "ACCEPTED"),
-        (2, "DELIVERED"),
-    ]
-    status = models.IntegerField(choices=STATUS_CHOICES, default=0)
-    product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, related_name="orders"
-    )
-    user = models.ForeignKey(
-        EndUser, on_delete=models.CASCADE, related_name="orders"
-    )
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.STATUS_CHOICES[self.status][1]
-
-    def save(self, *args, **kwargs):
-        if not self.pk:  # only set on creation
-            self.created_at = timezone.localtime(timezone.now())
-        self.updated_at = timezone.localtime(timezone.now())
-        super().save(*args, **kwargs)

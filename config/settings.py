@@ -34,7 +34,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -48,7 +47,10 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "account",
     "corsheaders",
+    # 'product.apps.ProductConfig',
     "product",
+    "order",
+
 ]
 
 MIDDLEWARE = [
@@ -82,7 +84,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -115,7 +116,6 @@ CACHES = {
     }
 }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -134,7 +134,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -144,7 +143,6 @@ USE_TZ = True
 TIME_ZONE = "Asia/Karachi"
 
 USE_I18N = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -157,7 +155,6 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "account.EndUser"
-
 
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
@@ -195,15 +192,14 @@ SIMPLE_JWT = {
     "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
 }
 
-
 CORS_ALLOW_ALL_ORIGINS = True
 
 APPEND_SLASH = False
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.Emailbackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Corrected spelling
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
-EMAIL_HOST_USER = ""
-EMAIL_HOST_PASSWORD = ""
+EMAIL_HOST_USER = "aurumwaveofficial@gmail.com"
+EMAIL_HOST_PASSWORD = "zriq pcjf koln zncp"  # Make sure this is an App Password, NOT your real password!
 EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+EMAIL_USE_SSL = False  # Keep this False when using TLS

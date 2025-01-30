@@ -4,5 +4,5 @@ from product.views import ProductListCreateView, ProductRetrieveUpdateDestroyVie
 
 urlpatterns = [
     path('products', ProductListCreateView.as_view()),
-    path('products/<int:request_id>', ProductRetrieveUpdateDestroyView.as_view()),
+    path('products/<int:product_id>', ProductRetrieveUpdateDestroyView.as_view()),
 ]
