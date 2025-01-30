@@ -15,6 +15,10 @@ source venv/bin/activate
 echo "Installing requirements"
 pip install -r requirements.txt
 
+# Run migrations
+echo "Running Django migrations"
+python3 manage.py migrate
+
 # Run the Django server
 echo "Running Django server"
 python3 manage.py runserver

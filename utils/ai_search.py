@@ -1,5 +1,6 @@
 import os
 import pickle
+from profile import Profile
 
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -58,8 +59,10 @@ def advance_search(query):
     threshold = 0.0  # vcould just fitler but osrting is better
     similar_products = []
 
+    cur_products = [p.id for p in Product.objects.all()]
+
     for idx, sim in enumerate(similarities):
-        if sim >= threshold:
+        if sim >= threshold and products[idx].id in cur_products:
             similar_products.append({
                 "product": products[idx],
                 "similarity": sim
